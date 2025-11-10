@@ -4,7 +4,38 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@* @page
+@model ToDoApp.Pages.Todo.IndexModel
+@{
+    ViewData["Title"] = "To-Do List";
+} *@
+
+<h1>To-Do List</h1>
+
+<form method="post" asp-page-handler="Add">
+    <input asp-for="NewTodo.Title" placeholder="New task" />
+    <input type="checkbox" asp-for="NewTodo.IsCompleted" /> Completed
+    <button type="submit">Add</button>
+</form>
+
+<table border="1" cellpadding="5" style="margin-top:20px;">
+    <tr>
+        <th>Title</th>
+        <th>Completed</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model.TodoItems)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.IsCompleted</td>
+            <td>
+                <form method="post" asp-page-handler="Delete">
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+

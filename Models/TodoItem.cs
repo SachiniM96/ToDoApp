@@ -13,5 +13,7 @@ namespace ToDoApp.Models
         public bool IsCompleted { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+
     }
 }
